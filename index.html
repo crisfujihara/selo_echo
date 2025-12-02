@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selo E.CH.O - Auditoria Rural e Certificação</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons (Ícones modernos) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Merriweather', serif;
+        }
+        
+        /* Custom Colors based on the uploaded images */
+        .bg-echo-gold { background-color: #bfa15f; }
+        .text-echo-gold { color: #bfa15f; }
+        .bg-echo-green { background-color: #2f5e3e; }
+        .text-echo-green { color: #2f5e3e; }
+        .bg-echo-dark { background-color: #1a1a1a; }
+        
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+            overflow-x: hidden;
+            overflow-y: visible !important;
+        }
+    </style>
+</head>
+<body class="text-gray-800 bg-gray-50">
+
+    <!-- Navegação -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Logo Area -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- LOGO: Imagem do Selo inserida aqui -->
+                    <img src="selo.jpg" alt="Logo Selo E.CH.O" class="h-12 w-12 rounded-full shadow-md border-2 border-yellow-600 object-cover hover:scale-105 transition">
+                    
+                    <div class="flex flex-col">
+                        <span class="brand-font text-2xl font-bold text-echo-green leading-none">SELO E.CH.O</span>
+                        <span class="text-xs uppercase tracking-widest text-yellow-700 font-semibold">Auditoria Rural</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#como-funciona" class="text-gray-600 hover:text-echo-green font-medium transition">Certificação</a>
+                    <a href="#produtos" class="text-gray-600 hover:text-echo-green font-medium transition">Produtos Certificados</a>
+                    <a href="#parceiros" class="text-gray-600 hover:text-echo-green font-medium transition">Parceiros</a>
+                    
+                    <div class="flex items-center space-x-3 ml-4">
+                        <button onclick="toggleModal('login-modal')" class="text-echo-green font-semibold hover:underline">Login</button>
+                        <button onclick="toggleModal('register-modal')" class="bg-echo-green text-white px-5 py-2 rounded-full font-medium hover:bg-green-800 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            Cadastro
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-echo-green focus:outline-none">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 shadow-inner">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#como-funciona" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-echo-green hover:bg-gray-50">Certificação</a>
+                <a href="#produtos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-echo-green hover:bg-gray-50">Produtos</a>
+                <a href="#parceiros" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-echo-green hover:bg-gray-50">Parceiros</a>
+                <div class="border-t border-gray-200 my-2 pt-2">
+                    <button onclick="toggleModal('login-modal')" class="block w-full text-left px-3 py-2 text-base font-medium text-echo-green">Entrar</button>
+                    <button onclick="toggleModal('register-modal')" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-800 bg-yellow-50 mt-1">Cadastrar Produtor</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-20 pb-16 md:pt-32 md:pb-24 flex items-center min-h-[85vh]" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                Transparência na Origem.<br>
+                <span class="text-yellow-400">Confiança no Consumo.</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-xl text-gray-200 mb-10 mx-auto md:mx-0 font-light">
+                O Selo E.CH.O garante a qualidade e a procedência dos produtos agrícolas. 
+                Conectamos produtores responsáveis a consumidores exigentes através da auditoria rural.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <button onclick="toggleModal('register-modal')" class="px-8 py-4 bg-yellow-600 text-white rounded-lg font-bold text-lg hover:bg-yellow-700 transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="ph ph-certificate"></i>
+                    Quero Certificar
+                </button>
+                <a href="#como-funciona" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold text-lg hover:bg-white hover:text-echo-green transition flex items-center justify-center gap-2">
+                    <i class="ph ph-info"></i>
+                    Saiba Mais
+                </a>
+            </div>
+        </div>
+        
+        <!-- Animated Badge / Selo em Destaque -->
+        <div class="hidden lg:block absolute right-12 bottom-12 animate-bounce-slow">
+            <!-- SELO DESTAQUE: Imagem do selo grande -->
+            <div class="relative group cursor-pointer">
+                <!-- Efeito de brilho atrás do selo -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-200 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                
+                <!-- Imagem Principal -->
+                <img src="selo.jpg" alt="Selo de Certificação E.CH.O" class="relative rounded-full w-64 h-64 border-4 border-white/90 shadow-2xl object-cover transform transition duration-500 group-hover:rotate-6 group-hover:scale-105">
+                
+                <!-- Tag flutuante -->
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-echo-green text-white px-6 py-2 rounded-full font-bold shadow-xl whitespace-nowrap border-2 border-white">
+                    <i class="ph ph-check-circle mr-1"></i> Certificação Garantida
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sobre / Estatísticas -->
+    <section class="bg-white py-12 shadow-sm relative -mt-8 mx-4 md:mx-auto max-w-6xl rounded-xl z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+            <div class="p-6 text-center group hover:bg-gray-50 transition rounded-l-xl">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition">
+                    <i class="ph ph-farm text-3xl text-echo-green"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">450+</h3>
+                <p class="text-gray-500 font-medium">Produtores Certificados</p>
+            </div>
+            <div class="p-6 text-center group hover:bg-gray-50 transition">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition">
+                    <i class="ph ph-package text-3xl text-yellow-700"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">1.200+</h3>
+                <p class="text-gray-500 font-medium">Produtos Auditados</p>
+            </div>
+            <div class="p-6 text-center group hover:bg-gray-50 transition rounded-r-xl">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition">
+                    <i class="ph ph-users text-3xl text-blue-700"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">10.2k</h3>
+                <p class="text-gray-500 font-medium">Consumidores Ativos</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona / Registro -->
+    <section id="como-funciona" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-echo-green font-bold tracking-wider uppercase text-sm">Processo de Auditoria</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Como obter o Selo E.CH.O?</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Um processo rigoroso e transparente para garantir que seu produto tenha o reconhecimento que merece.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="relative p-6 bg-white rounded-xl shadow-md border-t-4 border-gray-300 hover:border-echo-green transition-all duration-300 hover:-translate-y-2">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                    <div class="mt-6 text-center">
+                        <i class="ph ph-user-plus text-4xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Cadastro</h3>
+                        <p class="text-gray-600 text-sm">Realize o cadastro inicial do produtor e da propriedade em nossa plataforma digital.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative p-6 bg-white rounded-xl shadow-md border-t-4 border-gray-300 hover:border-echo-green transition-all duration-300 hover:-translate-y-2">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                    <div class="mt-6 text-center">
+                        <i class="ph ph-file-search text-4xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Análise</h3>
+                        <p class="text-gray-600 text-sm">Nossa equipe técnica analisa a documentação e os processos produtivos informados.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative p-6 bg-white rounded-xl shadow-md border-t-4 border-gray-300 hover:border-echo-green transition-all duration-300 hover:-translate-y-2">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                    <div class="mt-6 text-center">
+                        <i class="ph ph-magnifying-glass text-4xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Auditoria Local</h3>
+                        <p class="text-gray-600 text-sm">Visita presencial para verificação de conformidade com os padrões de qualidade.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative p-6 bg-white rounded-xl shadow-md border-t-4 border-yellow-500 transition-all duration-300 hover:-translate-y-2 transform scale-105 z-10">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                    <div class="mt-6 text-center">
+                        <i class="ph ph-medal text-4xl text-yellow-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2 text-echo-green">Certificação</h3>
+                        <p class="text-gray-600 text-sm">Aprovação final e emissão do Selo E.CH.O para uso em embalagens e marketing.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button onclick="toggleModal('register-modal')" class="inline-flex items-center text-echo-green font-bold hover:text-green-800 transition">
+                    Iniciar Processo de Registro <i class="ph ph-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos Certificados -->
+    <section id="produtos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 brand-font">Produtos em Destaque</h2>
+                    <p class="mt-2 text-gray-500">Conheça alguns dos produtos que já carregam nossa garantia.</p>
+                </div>
+                <a href="#" class="hidden md:block text-echo-green font-semibold hover:underline">Ver todos os produtos</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Queijo Artesanal" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <div class="bg-yellow-500 text-xs font-bold px-2 py-1 rounded text-white inline-block mb-2">Laticínios</div>
+                        <h3 class="text-white text-2xl font-bold mb-1">Queijo Canastra Real</h3>
+                        <p class="text-gray-300 text-sm mb-3">Fazenda Santa Luzia - MG</p>
+                        <div class="flex items-center gap-2">
+                            <!-- Miniatura do Selo -->
+                            <img src="selo.jpg" class="h-6 w-6 rounded-full border border-white" alt="Selo">
+                            <span class="text-white text-xs font-medium">Selo Validado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mel Orgânico" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <div class="bg-yellow-500 text-xs font-bold px-2 py-1 rounded text-white inline-block mb-2">Apiário</div>
+                        <h3 class="text-white text-2xl font-bold mb-1">Mel Silvestre Puro</h3>
+                        <p class="text-gray-300 text-sm mb-3">Apiário Doce Vida - SP</p>
+                        <div class="flex items-center gap-2">
+                            <!-- Miniatura do Selo -->
+                            <img src="selo.jpg" class="h-6 w-6 rounded-full border border-white" alt="Selo">
+                            <span class="text-white text-xs font-medium">Selo Validado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1595855709920-4e00f80a3b63?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Hortaliças" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <div class="bg-green-600 text-xs font-bold px-2 py-1 rounded text-white inline-block mb-2">Hortifruti</div>
+                        <h3 class="text-white text-2xl font-bold mb-1">Cesta Orgânica</h3>
+                        <p class="text-gray-300 text-sm mb-3">Sítio Verde Esperança - PR</p>
+                        <div class="flex items-center gap-2">
+                            <!-- Miniatura do Selo -->
+                            <img src="selo.jpg" class="h-6 w-6 rounded-full border border-white" alt="Selo">
+                            <span class="text-white text-xs font-medium">Selo Validado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="btn-primary inline-block bg-echo-green text-white px-6 py-3 rounded-lg">Ver todos os produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parceiros Section -->
+    <section id="parceiros" class="py-16 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8">Nossos Parceiros e Apoiadores</h2>
+            
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Mockup Logos -->
+                <div class="flex items-center gap-2 text-xl font-bold text-gray-600">
+                    <i class="ph ph-plant text-4xl"></i> AgroTech
+                </div>
+                <div class="flex items-center gap-2 text-xl font-bold text-gray-600">
+                    <i class="ph ph-bank text-4xl"></i> RuralBank
+                </div>
+                <div class="flex items-center gap-2 text-xl font-bold text-gray-600">
+                    <i class="ph ph-globe text-4xl"></i> BioLogística
+                </div>
+                <div class="flex items-center gap-2 text-xl font-bold text-gray-600">
+                    <i class="ph ph-flask text-4xl"></i> LabSafe
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-echo-green rounded-2xl p-8 md:p-12 text-white flex flex-col md:flex-row items-center justify-between">
+                <div class="text-left mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">Quer se tornar um parceiro?</h3>
+                    <p class="text-green-100">Junte-se a nós na missão de levar qualidade à mesa do consumidor.</p>
+                </div>
+                <button class="bg-white text-echo-green px-8 py-3 rounded-lg font-bold hover:bg-yellow-50 transition shadow-lg">
+                    Seja um Parceiro
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="h-8 w-8 rounded-full bg-yellow-600 flex items-center justify-center overflow-hidden">
+                            <img src="selo.jpg" alt="Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="brand-font text-xl font-bold">SELO E.CH.O</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Auditoria rural comprometida com a transparência, sustentabilidade e qualidade dos produtos agrícolas brasileiros.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Navegação</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-yellow-500 transition">Início</a></li>
+                        <li><a href="#como-funciona" class="hover:text-yellow-500 transition">Como Certificar</a></li>
+                        <li><a href="#produtos" class="hover:text-yellow-500 transition">Produtos</a></li>
+                        <li><a href="#parceiros" class="hover:text-yellow-500 transition">Parceiros</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Legal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-yellow-500 transition">Termos de Uso</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition">Regulamento do Selo</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition">Portal da Transparência</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Contato</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-2"><i class="ph ph-envelope text-yellow-500"></i> contato@seloecho.com.br</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-phone text-yellow-500"></i> (11) 99999-8888</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-map-pin text-yellow-500"></i> Av. Brasil, 1000 - SP</li>
+                    </ul>
+                    <div class="mt-6 flex gap-4">
+                        <a
